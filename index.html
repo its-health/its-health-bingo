@@ -306,36 +306,38 @@
 
   <script>
     const tasks = [
-     { name: "水を1.5L以上飲む", points: 1 },
-     { name: "8,000歩を期間中に3回達成", points: 4 },
-     { name: "ストレッチ5分", points: 1 },
-     { name: "運動30分以上", points: 3 },
-     { name: "ラジオ体操", points: 2 },
 
-     { name: "野菜を3日連続で食べる", points: 2 },
-     { name: "3日連続7時間以上睡眠", points: 4 },
-     { name: "期間中に腕立て10回を3セット", points: 3 },
-     { name: "朝食を3日連続で食べる", points: 2 },
-     { name: "ジョギングまたは早歩き15分", points: 3 },
+  { name: "水を1.5L以上飲む", points: 1 },
+  { name: "8,000歩を期間中に3回達成", points: 8 },
+  { name: "ストレッチ5分", points: 1 },
+  { name: "運動30分以上", points: 3 },
+  { name: "ラジオ体操", points: 3 },
 
-     { name: "職場の人と健康について話す", points: 2 },
-     { name: "健康に関する記事を読む", points: 2 },
-     { name: "FREE", points: 0, free: true },
-     { name: "3日連続でカフェインを控える", points: 3 },
-     { name: "スクワット10回", points: 2 },
+  { name: "野菜を3日連続で食べる", points: 3 },
+  { name: "3日連続7時間以上睡眠", points: 5 },
+  { name: "期間中に腕立て10回を3セット", points: 3 },
+  { name: "朝食を3日連続で食べる", points: 3 },
+  { name: "ジョギングまたは早歩き15分", points: 3 },
 
-     { name: "期間中に10日以上、自分の健康状態を記録する", points: 5 },
-     { name: "姿勢を意識する", points: 1 },
-     { name: "血圧を測る", points: 4 },
-     { name: "プランク15秒を3日連続で実施", points: 3 },
-     { name: "深呼吸を3回行う", points: 1 },
+  { name: "職場の人と健康について話す", points: 3 },
+  { name: "健康に関する記事を読む", points: 3 },
+  { name: "FREE", points: 0, free: true },
+  { name: "3日連続でカフェインを控える", points: 5 },
+  { name: "スクワット10回", points: 3 },
 
-     { name: "23時までの就寝を3日連続で継続", points: 4 },
-     { name: "筋トレ20分", points: 3 },
-     { name: "一万歩歩く", points: 3 },
-     { name: "健康セミナー視聴", points: 4 },
-     { name: "駅でエスカレーターを使わない", points: 1 }
-    ];
+  { name: "期間中に10日以上、自分の健康状態を記録する", points: 8 },
+  { name: "姿勢を意識する", points: 1 },
+  { name: "血圧を測る", points: 5 },
+  { name: "プランク15秒を3日連続で実施", points: 5 },
+  { name: "深呼吸を3回行う", points: 1 },
+
+  { name: "23時までの就寝を3日連続で継続", points: 5 },
+  { name: "筋トレ20分", points: 5 },
+  { name: "一万歩歩く", points: 5 },
+  { name: "健康セミナー視聴", points: 5 },
+  { name: "駅でエスカレーターを使わない", points: 1 }
+
+];
 
     const lines = [
       [0, 1, 2, 3, 4],
@@ -405,8 +407,8 @@
 
         if (task.points >= 8) {
           starMark =
-            '<span class="high-point">⭐⭐</span>';
-        } else if (task.points >= 4) {
+            '<span class="high-point">⭐⭐⭐</span>';
+        } else if (task.points >= 5) {
           starMark =
             '<span class="high-point">⭐</span>';
         }
