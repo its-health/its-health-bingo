@@ -442,7 +442,7 @@
     );
 
     checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener("change", function () {
+      checkbox.addEventListener("change", async function () {
         const index = Number(this.dataset.index);
 
         checkedTasks[index] = this.checked;
