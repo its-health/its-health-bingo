@@ -637,16 +637,27 @@ onSnapshot(
 
     let html = "";
 
-    users.forEach((user, index) => {
+  users.forEach((user, index) => {
 
-      html += `
-        ${index + 1}位
-        ${user.name}
-        ${user.points}pt
-        <br>
-      `;
+  let medal = "";
 
-    });
+  if (index === 0) {
+    medal = "🥇";
+  } else if (index === 1) {
+    medal = "🥈";
+  } else if (index === 2) {
+    medal = "🥉";
+  }
+
+  html += `
+    ${medal} ${index + 1}位
+    ${user.name}
+    ${user.points}pt
+    <br>
+  `;
+
+});
+`
 
     document.getElementById(
       "rankingList"
