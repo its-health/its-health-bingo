@@ -568,11 +568,11 @@ import {
   getFirestore,
   doc,
   setDoc,
-  getDocs,
-  collection
+  collection,
+  onSnapshot
 }
 from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
+  
 const firebaseConfig = {
   apiKey: "AIzaSyAynlZKtvpBGKZnldtncrDH1QTHpqKIk4c",
   authDomain: "its-health-bingo.firebaseapp.com",
@@ -616,47 +616,45 @@ window.testFirestore = async () => {
   }
 
 };
-  async function loadRanking() {
+onSnapshot(
+  collection(db, "users"),
+  (snapshot) => {
 
-  const snapshot = await getDocs(
-    collection(db, "users")
-  );
+    let users = [];
 
-  let users = [];
+    snapshot.forEach((doc) => {
 
-  snapshot.forEach((doc) => {
+      const data = doc.data();
 
-    const data = doc.data();
+      users.push({
+        name: data.name,
+        points: data.points || 0
+      });
 
-    users.push({
-      name: data.name,
-      points: data.points || 0
     });
 
-  });
+    users.sort((a, b) => b.points - a.points);
 
-  users.sort((a, b) => b.points - a.points);
+    let html = "";
 
-  let html = "";
+    users.forEach((user, index) => {
 
-  users.forEach((user, index) => {
+      html += `
+        ${index + 1}位
+        ${user.name}
+        ${user.points}pt
+        <br>
+      `;
 
-    html += `
-      ${index + 1}位
-      ${user.name}
-      ${user.points}pt
-      <br>
-    `;
+    });
 
-  });
+    document.getElementById(
+      "rankingList"
+    ).innerHTML = html;
 
-  document.getElementById(
-    "rankingList"
-  ).innerHTML = html;
+  }
+);
 
-}
-
-loadRanking();
 
 </script>
 </body>
