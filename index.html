@@ -303,7 +303,7 @@
 
 .my-rank-points {
 
-  font-size: 40px;
+  font-size: 24px;
 
   font-weight: bold;
 
@@ -765,7 +765,11 @@ if (myData) {
   <div class="my-rank-position">
     ${myRank}位
   </div>
-
+  
+ <div class="my-rank-points">
+    （${myData.points}pt）
+  </div>
+  
   <div class="my-rank-total">
     ／ ${totalUsers}人中
   </div>
