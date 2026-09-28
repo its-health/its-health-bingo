@@ -286,6 +286,25 @@
   color: #00a991;
 
 }
+    .my-rank-row {
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  margin-bottom:16px;
+
+}
+
+.my-rank-label {
+
+  font-size:20px;
+
+  font-weight:bold;
+
+}
   </style>
 </head>
 
@@ -714,28 +733,33 @@ if (myData) {
   `
   <div class="my-rank-row">
 
-  <div class="my-rank-label">
-    👤 あなたの順位
+    <div class="my-rank-label">
+      👤 あなたの順位
+    </div>
+
+    <div>
+
+      <span class="my-rank-position">
+        ${myRank}位
+      </span>
+
+      <span class="my-rank-total">
+        ／ ${totalUsers}人中
+      </span>
+
+      <span class="my-rank-points">
+        ${myData.points}pt
+      </span>
+
+    </div>
+
   </div>
 
-  <div>
+  <hr style="margin:16px 0;">
+  `
+  + html;
 
-    <span class="my-rank-position">
-      🥇 1位
-    </span>
-
-    <span class="my-rank-total">
-      ／ 6人中
-    </span>
-
-    <span class="my-rank-points">
-      74pt
-    </span>
-
-  </div>
-
-</div>
-
+}
 
 document.getElementById(
   "rankingList"
