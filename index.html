@@ -488,27 +488,6 @@ async function saveChecks() {
   }
 }
 
-  try {
-
-    await setDoc(
-      doc(db, "users", userId),
-      {
-        name: userId,
-        checks: checkedTasks,
-        points: Number(
-          document.getElementById("totalPoints").textContent
-        ),
-        updatedAt: new Date().toISOString()
-      }
-    );
-
-  } catch (e) {
-
-    console.error(e);
-
-  }
-}
-
     function updateScore() {
       let taskPoints = 0;
       let completedCount = 0;
