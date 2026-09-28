@@ -458,7 +458,6 @@
         updateScore();
  
 await saveChecks();
-await loadRanking();
       });
     });
 
@@ -649,11 +648,12 @@ onSnapshot(
     medal = "🥉";
   }
 
- html += `
-  <div**tyle="margin:**x 0;">
-    ${medal} ${index + 1}位**   ${**er.name}
+html += `
+  <div style="margin:8px 0;">
+    ${medal} ${index + 1}位
+    ${user.name}
     ${user.points}pt
-  <**iv>
+  </div>
 `;
 });
 
