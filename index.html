@@ -296,7 +296,9 @@
 
   <div class="rank">
     <h2>🏆 ランキング</h2>
-    <p>ランキングは次の段階でFirestoreと接続します。</p>
+    <div id="rankingList">
+読み込み中...
+</div>
     <button onclick="testFirestore()">
   Firestoreテスト
 </button>
@@ -560,7 +562,14 @@ async function saveChecks() {
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDocs,
+  collection
+}
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAynlZKtvpBGKZnldtncrDH1QTHpqKIk4c",
@@ -605,6 +614,47 @@ window.testFirestore = async () => {
   }
 
 };
+  async function loadRanking() {
+
+  const snapshot = await getDocs(
+    collection(db, "users")
+  );
+
+  let users = [];
+
+  snapshot.forEach((doc) => {
+
+    const data = doc.data();
+
+    users.push({
+      name: data.name,
+      points: data.points || 0
+    });
+
+  });
+
+  users.sort((a, b) => b.points - a.points);
+
+  let html = "";
+
+  users.forEach((user, index) => {
+
+    html += `
+      ${index + 1}位
+      ${user.name}
+      ${user.points}pt
+      <br>
+    `;
+
+  });
+
+  document.getElementById(
+    "rankingList"
+  ).innerHTML = html;
+
+}
+
+loadRanking();
 
 </script>
 </body>
