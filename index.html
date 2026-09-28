@@ -259,56 +259,51 @@
         font-size: 17px;
       }
     }
-    .my-rank-card {
+   .my-rank-summary {
 
-  margin-top: 20px;
-  padding: 20px;
+  text-align: center;
+
+  padding: 16px;
+
+  margin-bottom: 16px;
 
   background: #e5faf7;
 
   border: 2px solid #00c3a7;
 
-  border-radius: 16px;
-
-  text-align: center;
+  border-radius: 12px;
 
 }
 
-.my-rank-title {
-
-  color: #666;
+.my-rank-label {
 
   font-size: 14px;
 
-  margin-bottom: 10px;
+  color: #666;
 
 }
 
-.my-rank-position {
+.my-rank-main {
 
-  font-size: 32px;
+  font-size: 40px;
 
   font-weight: bold;
 
   color: #00a991;
 
-  margin-bottom: 8px;
-
 }
 
-.my-rank-name {
+.my-rank-sub {
 
-  font-size: 20px;
+  font-size: 16px;
 
-  font-weight: bold;
-
-  margin-bottom: 8px;
+  color: #666;
 
 }
 
 .my-rank-points {
 
-  font-size: 32px;
+  font-size: 24px;
 
   font-weight: bold;
 
@@ -735,21 +730,23 @@ const myData =
     user => user.name === userId
   );
 
+const totalUsers = users.length;
+
 if (myData) {
 
-  html += `
-    <div class="my-rank-card">
+  html = `
+    <div class="my-rank-summary">
 
-      <div class="my-rank-title">
-        👑 あなたの順位
+      <div class="my-rank-label">
+        👤 あなたの順位
       </div>
 
-      <div class="my-rank-position">
+      <div class="my-rank-main">
         ${myRank}位
       </div>
 
-      <div class="my-rank-name">
-        ${myData.name}
+      <div class="my-rank-sub">
+        ${totalUsers}人中
       </div>
 
       <div class="my-rank-points">
@@ -757,7 +754,9 @@ if (myData) {
       </div>
 
     </div>
-  `;
+
+    <hr style="margin:20px 0;">
+  ` + html;
 
 }
 
