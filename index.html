@@ -469,11 +469,17 @@ async function saveChecks() {
 
     await window.setDoc(
       window.doc(window.db, "users", userId),
-      {
-        name: userId,
-        checks: checkedTasks,
-        updatedAt: new Date().toISOString()
-      },
+   {
+  name: userId,
+  checks: checkedTasks,
+  points: Number(
+    document.getElementById("totalPoints").textContent
+  ),
+  bingoCount: Number(
+    document.getElementById("bingoCount").textContent
+  ),
+  updatedAt: new Date().toISOString()
+},
       { merge: true }
     );
 
