@@ -702,7 +702,7 @@ users.slice(0, 5).forEach((user, index) => {
     medal = "🥉";
   }
 
- html += `
+html += `
   <div style="
     display:flex;
     justify-content:space-between;
@@ -711,15 +711,23 @@ users.slice(0, 5).forEach((user, index) => {
   ">
 
     <span>
-      ${medal}
+
       <span style="
         display:inline-block;
-        width:35px;
+        width:30px;
+      ">
+        ${medal}
+      </span>
+
+      <span style="
+        display:inline-block;
+        width:40px;
       ">
         ${index + 1}位
       </span>
 
       ${user.name}
+
     </span>
 
     <strong>
@@ -762,9 +770,9 @@ if (myData) {
     ／ ${totalUsers}人中
   </div>
 
-  <div class="my-rank-points">
-    ${myData.points}pt
-  </div>
+ <span class="my-rank-points">
+｜ ${myData.points}pt
+</span>
 
 </div>
 
