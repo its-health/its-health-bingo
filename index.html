@@ -750,7 +750,16 @@ const myRank =
   users.findIndex(
     user => user.name === userId
   ) + 1;
+let myMedal = "";
 
+if (myRank === 1) {
+  myMedal = "🥇";
+} else if (myRank === 2) {
+  myMedal = "🥈";
+} else if (myRank === 3) {
+  myMedal = "🥉";
+}
+    
 const myData =
   users.find(
     user => user.name === userId
@@ -768,9 +777,9 @@ if (myData) {
     👤 あなたの順位
   </span>
 
-  <span class="my-rank-position">
-    🥇 ${myRank}位
-  </span>
+<span class="my-rank-position">
+  ${myMedal} ${myRank}位
+</span>
 
   <span class="my-rank-total">
     ／ ${totalUsers}人中
