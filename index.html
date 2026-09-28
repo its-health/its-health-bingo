@@ -297,6 +297,9 @@
   <div class="rank">
     <h2>🏆 ランキング</h2>
     <p>ランキングは次の段階でFirestoreと接続します。</p>
+    <button onclick="testFirestore()">
+  Firestoreテスト
+</button>
   </div>
 
   <div class="note">
@@ -525,6 +528,51 @@
     saveChecks();
     updateScore();
   </script>
+<script type="module">
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAynlZKtvpBGKZnldtncrDH1QTHpqKIk4c",
+  authDomain: "its-health-bingo.firebaseapp.com",
+  projectId: "its-health-bingo",
+  storageBucket: "its-health-bingo.firebasestorage.app",
+  messagingSenderId: "717191474254",
+  appId: "1:717191474254:web:3290617d8abf95d548a71f",
+  measurementId: "G-BQB62ZQPNX"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.testFirestore = async () => {
+
+  try {
+
+    const params = new URLSearchParams(window.location.search);
+    const userId = params.get("user") || "guest";
+
+    await setDoc(
+      doc(db, "users", userId),
+      {
+        name: userId,
+        updatedAt: new Date().toISOString()
+      }
+    );
+
+    alert("Firestore保存成功！");
+
+  } catch (e) {
+
+    console.error(e);
+
+    alert("Firestore保存失敗");
+
+  }
+
+};
+
+</script>
 </body>
 </html>
