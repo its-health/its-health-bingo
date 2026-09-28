@@ -458,34 +458,13 @@
       });
     });
 
-async function saveChecks() {
+function saveChecks() {
 
   localStorage.setItem(
     storageKey,
     JSON.stringify(checkedTasks)
   );
 
-  try {
-
-    await setDoc(
-      doc(db, "users", userId),
-      {
-        name: userId,
-        checks: checkedTasks,
-        points: Number(
-          document.getElementById("totalPoints").textContent
-        ),
-        updatedAt: new Date().toISOString()
-      }
-    );
-
-    console.log("Firestore保存成功");
-
-  } catch (e) {
-
-    console.error("Firestore保存失敗", e);
-
-  }
 }
 
     function updateScore() {
