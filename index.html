@@ -734,31 +734,26 @@ const totalUsers = users.length;
 
 if (myData) {
 
-  html = `
-    <div class="my-rank-summary">
+  html =
+  `
+  <div style="
+    margin-bottom:20px;
+    padding-bottom:12px;
+    border-bottom:1px solid #ddd;
+    font-size:20px;
+    font-weight:bold;
+  ">
+    👤 あなたの順位　
 
-      <div class="my-rank-label">
-        👤 あなたの順位
-      </div>
+    ${myRank}位 / ${totalUsers}人中　
 
-      <div class="my-rank-main">
-        ${myRank}位
-      </div>
-
-      <div class="my-rank-sub">
-        ${totalUsers}人中
-      </div>
-
-      <div class="my-rank-points">
-        ${myData.points}pt
-      </div>
-
-    </div>
-
-    <hr style="margin:20px 0;">
-  ` + html;
-
+    ${myData.points}pt
+  </div>
+  `
+  + html;
+  
 }
+
 
 document.getElementById(
   "rankingList"
