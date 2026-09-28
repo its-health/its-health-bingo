@@ -458,12 +458,56 @@
       });
     });
 
-    function saveChecks() {
-      localStorage.setItem(
-        storageKey,
-        JSON.stringify(checkedTasks)
-      );
-    }
+async function saveChecks() {
+
+  localStorage.setItem(
+    storageKey,
+    JSON.stringify(checkedTasks)
+  );
+
+  try {
+
+    await setDoc(
+      doc(db, "users", userId),
+      {
+        name: userId,
+        checks: checkedTasks,
+        points: Number(
+          document.getElementById("totalPoints").textContent
+        ),
+        updatedAt: new Date().toISOString()
+      }
+    );
+
+    console.log("Firestore保存成功");
+
+  } catch (e) {
+
+    console.error("Firestore保存失敗", e);
+
+  }
+}
+
+  try {
+
+    await setDoc(
+      doc(db, "users", userId),
+      {
+        name: userId,
+        checks: checkedTasks,
+        points: Number(
+          document.getElementById("totalPoints").textContent
+        ),
+        updatedAt: new Date().toISOString()
+      }
+    );
+
+  } catch (e) {
+
+    console.error(e);
+
+  }
+}
 
     function updateScore() {
       let taskPoints = 0;
