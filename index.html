@@ -736,41 +736,42 @@ const totalUsers = users.length;
 if (myData) {
 
   html =
- <div class="my-info-row">
+  `
+  <div class="my-info-row">
 
-  <div class="my-info-label">
-    👤 あなたの順位
-  </div>
+    <div class="my-info-label">
+      👤 あなたの順位
+    </div>
 
-  <div class="my-info-value">
+    <div class="my-info-value">
 
-    <span class="my-rank-position">
-      ${myMedal}${myRank}位
-    </span>
+      <span class="my-rank-position">
+        ${myMedal}${myRank}位
+      </span>
 
-    <span class="my-rank-total">
-      ／ ${totalUsers}人中
-    </span>
+      <span class="my-rank-total">
+        ／ ${totalUsers}人中
+      </span>
 
-  </div>
-
-</div>
-
-<div class="my-info-row">
-
-  <div class="my-info-label">
-    ⭐ 獲得ポイント
-  </div>
-
-  <div class="my-info-value">
-
-    <span class="my-rank-points">
-      ${myData.points}pt
-    </span>
+    </div>
 
   </div>
 
-</div>
+  <div class="my-info-row">
+
+    <div class="my-info-label">
+      ⭐ 獲得ポイント
+    </div>
+
+    <div class="my-info-value">
+
+      <span class="my-rank-points">
+        ${myData.points}pt
+      </span>
+
+    </div>
+
+  </div>
 
   <hr style="margin:16px 0;">
   `
