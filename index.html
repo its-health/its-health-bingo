@@ -458,14 +458,35 @@
       });
     });
 
-function saveChecks() {
+async function saveChecks() {
 
   localStorage.setItem(
     storageKey,
     JSON.stringify(checkedTasks)
   );
 
+  try {
+
+    await window.setDoc(
+      window.doc(window.db, "users", userId),
+      {
+        name: userId,
+        checks: checkedTasks,
+        updatedAt: new Date().toISOString()
+      },
+      { merge: true }
+    );
+
+    console.log("Firestore保存成功");
+
+  } catch (e) {
+
+    console.error("Firestore保存失敗", e);
+
+  }
+
 }
+
 
     function updateScore() {
       let taskPoints = 0;
@@ -547,6 +568,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+window.db = db;
+window.setDoc = setDoc;
+window.doc = doc;
 
 window.testFirestore = async () => {
 
