@@ -768,11 +768,14 @@ onSnapshot(
 
       const data = doc.data();
 
-      users.push({
-        name:
-  data.displayName ||
-  data.name,
-      });
+     users.push({
+  name:
+    data.displayName ||
+    data.name,
+
+  points:
+    data.points || 0
+});
 
     });
 
