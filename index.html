@@ -285,16 +285,22 @@
 
   color: #00a991;
 
+  margin-left: 30px;
+
 }
-    .my-rank-row {
 
-  display:flex;
+}
+ .my-rank-row {
 
-  align-items:center;
+  display: flex;
 
-  justify-content:space-between;
+  justify-content: center;
 
-  margin-bottom:16px;
+  align-items: center;
+
+  gap: 30px;
+
+  margin-bottom: 20px;
 
 }
 
@@ -695,22 +701,32 @@ users.slice(0, 5).forEach((user, index) => {
     medal = "🥉";
   }
 
-  html += `
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      margin:8px 0;
-      font-size:18px;
-    ">
-      <span>
-        ${medal} ${index + 1}位 ${user.name}
+ html += `
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    margin:8px 0;
+    font-size:18px;
+  ">
+
+    <span>
+      ${medal}
+      <span style="
+        display:inline-block;
+        width:35px;
+      ">
+        ${index + 1}位
       </span>
 
-      <strong>
-        ${user.points}pt
-      </strong>
-    </div>
-  `;
+      ${user.name}
+    </span>
+
+    <strong>
+      ${user.points}pt
+    </strong>
+
+  </div>
+`;
 
 });
 
@@ -743,13 +759,13 @@ if (myData) {
         ${myRank}位
       </span>
 
-      <span class="my-rank-total">
-        ／ ${totalUsers}人中
-      </span>
+     <span class="my-rank-total">
+  ／ ${totalUsers}人中
+</span>
 
-      <span class="my-rank-points">
-        ${myData.points}pt
-      </span>
+<span class="my-rank-points">
+  ${myData.points}pt
+</span>
 
     </div>
 
