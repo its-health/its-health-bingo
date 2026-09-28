@@ -634,9 +634,10 @@ onSnapshot(
 
     users.sort((a, b) => b.points - a.points);
 
-    let html = "";
+let html = "";
 
-  users.forEach((user, index) => {
+// 上位5人
+users.slice(0, 5).forEach((user, index) => {
 
   let medal = "";
 
@@ -648,21 +649,70 @@ onSnapshot(
     medal = "🥉";
   }
 
-html += `
-  <div style="margin:8px 0;">
-    ${medal} ${index + 1}位
-    ${user.name}
-    ${user.points}pt
-  </div>
-`;
+  html += `
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      margin:8px 0;
+      font-size:18px;
+    ">
+      <span>
+        ${medal} ${index + 1}位 ${user.name}
+      </span>
+
+      <strong>
+        ${user.points}pt
+      </strong>
+    </div>
+  `;
+
 });
 
-    document.getElementById(
-      "rankingList"
-    ).innerHTML = html;
+// 自分の順位
+const myRank =
+  users.findIndex(
+    user => user.name === userId
+  ) + 1;
 
-  }
-);
+const myData =
+  users.find(
+    user => user.name === userId
+  );
+
+if (myRank > 5 && myData) {
+
+  html += `
+    <hr style="margin:16px 0">
+
+    <div style="
+      font-size:14px;
+      color:#666;
+      margin-bottom:6px;
+    ">
+      あなたの順位
+    </div>
+
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      font-size:18px;
+      font-weight:bold;
+      color:#00a991;
+    ">
+      <span>
+        ${myRank}位 ${myData.name}
+      </span>
+
+      <span>
+        ${myData.points}pt
+      </span>
+    </div>
+  `;
+}
+
+document.getElementById(
+  "rankingList"
+).innerHTML = html;
 
 
 </script>
