@@ -769,8 +769,10 @@ onSnapshot(
       const data = doc.data();
 
       users.push({
-        name: data.name,
-        points: data.points || 0
+        name:
+  data.displayName ||
+  data.name,
+`
       });
 
     });
