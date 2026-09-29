@@ -294,6 +294,17 @@
         font-size: 17px;
       }
     }
+    .complete-message {
+
+  display: none;
+
+  background: #ffe7f3;
+
+  border: 1px solid #ff8fc7;
+
+  color: #d63384;
+
+}
 .my-info-row {
 
   display: flex;
@@ -393,6 +404,7 @@
   </div>
 
   <div class="message" id="bingoMessage"></div>
+<div class="message complete-message" id="completeMessage"></div>
 
   <div class="grid" id="bingoGrid"></div>
 
@@ -635,26 +647,45 @@ async function saveChecks() {
         "totalPoints"
       ).textContent = totalPoints;
 
-      const message =
-        document.getElementById("bingoMessage");
+     const message =
+  document.getElementById("bingoMessage");
 
-      if (isComplete) {
-        message.style.display = "block";
-        message.textContent =
-          "🎉 コンプリート達成！50ptボーナス獲得！";
-      } else if (bingoCount > 0) {
-        message.style.display = "block";
-        message.textContent =
-          "🎉 " +
-          bingoCount +
-          "ライン達成！ラインボーナス ＋" +
-          lineBonus +
-          "pt！";
-      } else {
-        message.style.display = "none";
-        message.textContent = "";
-      }
-    }
+const completeMessage =
+  document.getElementById("completeMessage");
+
+if (bingoCount > 0) {
+
+  message.style.display = "block";
+
+  message.textContent =
+    "🎉 " +
+    bingoCount +
+    "ライン達成！ラインボーナス ＋" +
+    lineBonus +
+    "pt！";
+
+} else {
+
+  message.style.display = "none";
+
+  message.textContent = "";
+
+}
+
+if (isComplete) {
+
+  completeMessage.style.display = "block";
+
+  completeMessage.textContent =
+    "🎉 コンプリート達成！50ptボーナス獲得！";
+
+} else {
+
+  completeMessage.style.display = "none";
+
+  completeMessage.textContent = "";
+
+}
 
     saveChecks();
     updateScore();
