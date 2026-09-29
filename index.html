@@ -386,6 +386,8 @@
   <div class="guide">
    
     達成したマスにチェックを入れてください。高得点のマスには★が付いています。
+    1ライン達成ごとに＋5pt加算されます。
+    なお、全マス達成時は＋50pt加算されます。
   
   </div>
 
@@ -638,13 +640,13 @@ async function saveChecks() {
       if (isComplete) {
         message.style.display = "block";
         message.textContent =
-          "🎉 コンプリート達成！20ptボーナス獲得！";
+          "🎉 コンプリート達成！50ptボーナス獲得！";
       } else if (bingoCount > 0) {
         message.style.display = "block";
         message.textContent =
           "🎉 " +
           bingoCount +
-          "ライン達成！ラインボーナス " +
+          "ライン達成！ラインボーナス ＋" +
           lineBonus +
           "pt！";
       } else {
