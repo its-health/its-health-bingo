@@ -787,6 +787,8 @@ onSnapshot(
       const data = doc.data();
 
      users.push({
+  userId: data.name,
+
   name:
     data.displayName ||
     data.name,
@@ -854,7 +856,7 @@ html += `
 // 自分の順位
 const myRank =
   users.findIndex(
-    user => user.name === userId
+    user => user.userId === userId
   ) + 1;
 let myMedal = "";
 
@@ -868,7 +870,7 @@ if (myRank === 1) {
     
 const myData =
   users.find(
-    user => user.name === userId
+    user => user.userId === userId
   );
 
 const totalUsers = users.length;
