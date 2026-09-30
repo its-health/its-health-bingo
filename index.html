@@ -697,10 +697,33 @@ import {
   getFirestore,
   doc,
   setDoc,
+  getDoc,
   collection,
   onSnapshot
 }
 from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+  
+  window.loadUserData = async (userId) => {
+
+  const snapshot = await getDoc(
+    doc(db, "users", userId)
+  );
+
+  if (!snapshot.exists()) {
+    return;
+  }
+
+  const data = snapshot.data();
+
+  if (!data.checks) {
+    return;
+  }
+
+  window.checkedTasks = data.checks;
+
+  location.reload();
+
+};
   
 const firebaseConfig = {
   apiKey: "AIzaSyAynlZKtvpBGKZnldtncrDH1QTHpqKIk4c",
@@ -725,6 +748,7 @@ window.testFirestore = async () => {
 
     const params = new URLSearchParams(window.location.search);
     const userId = params.get("user") || "guest";
+    window.currentUserId = userId;
 
     await setDoc(
       doc(db, "users", userId),
