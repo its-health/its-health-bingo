@@ -494,10 +494,41 @@
     }
 
     let checkedTasks =
-      Array.isArray(savedChecks) &&
-      savedChecks.length === tasks.length
-        ? savedChecks
-        : Array(tasks.length).fill(false);
+  Array(tasks.length).fill(false);
+    async function loadChecksFromFirestore() {
+
+  try {
+
+    const snapshot = await window.getDoc(
+      window.doc(
+        window.db,
+        "users",
+        userId
+      )
+    );
+
+    if (!snapshot.exists()) {
+      return;
+    }
+
+    const data = snapshot.data();
+
+    if (
+      Array.isArray(data.checks) &&
+      data.checks.length === tasks.length
+    ) {
+
+      checkedTasks = data.checks;
+
+    }
+
+  } catch (e) {
+
+    console.error(e);
+
+  }
+
+}
 
     checkedTasks[12] = true;
 
@@ -741,6 +772,7 @@ const db = getFirestore(app);
 window.db = db;
 window.setDoc = setDoc;
 window.doc = doc;
+window.getDoc = getDoc;
 
 window.testFirestore = async () => {
 
