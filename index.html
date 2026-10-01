@@ -479,7 +479,7 @@
     const displayUserName =
       userId === "guest"
         ? "お試し参加者"
-        : displayName + " さん";
+        : userId + " さん";
 
     document.getElementById("userName").textContent = displayUserName;
 
@@ -928,6 +928,7 @@ onSnapshot(
       const data = doc.data();
 
      users.push({
+
   userId: data.name,
 
   name:
@@ -936,6 +937,7 @@ onSnapshot(
 
   points:
     data.points || 0
+
 });
 
     });
@@ -1013,7 +1015,14 @@ const myData =
   users.find(
     user => user.userId === userId
   );
+if (myData) {
 
+  document.getElementById(
+    "userName"
+  ).textContent =
+    myData.name + " さん";
+
+}
 const totalUsers = users.length;
 
 if (myData) {
