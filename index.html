@@ -373,7 +373,8 @@
 <body>
 
   <h1>🏋️iTS健康増進ビンゴ🔥</h1>
-  <div class="user-name" id="userName">参加者</div>
+  <div class="user-name" id="userName"></div>
+
 
   <div class="summary">
     <div class="summary-box">
@@ -475,11 +476,6 @@
     const params = new URLSearchParams(window.location.search);
     const userId = params.get("user") || "guest";
     const storageKey = "itsHealthBingo_" + userId;
-
-    const displayUserName =
-      userId === "guest"
-        ? "お試し参加者"
-        : userId + " さん";
 
     document.getElementById("userName").textContent = displayUserName;
 
