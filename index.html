@@ -639,25 +639,7 @@
 
 }
 
-    checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener("change", async function () {
-        const index = Number(this.dataset.index);
-
-        checkedTasks[index] = this.checked;
-        checkedTasks[12] = true;
-
-        const cell = this.closest(".cell");
-
-        cell.classList.toggle(
-          "completed",
-          this.checked
-        );
-        
-        updateScore();
- 
-await saveChecks();
-      });
-    });
+    
 async function loadChecksFromFirestore() {
 
   try {
