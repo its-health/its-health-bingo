@@ -532,56 +532,112 @@
 
     checkedTasks[12] = true;
 
-    const grid = document.getElementById("bingoGrid");
+    function buildBingo() {
 
-    tasks.forEach((task, index) => {
-      const cell = document.createElement("label");
-      cell.className = "cell";
+  const grid =
+    document.getElementById("bingoGrid");
 
-      if (task.free) {
-        cell.classList.add("free");
+  grid.innerHTML = "";
 
-        cell.innerHTML = `
-          <div class="task-name">FREE</div>
-          <div class="point">自動達成</div>
-        `;
-      } else {
-        if (checkedTasks[index]) {
-          cell.classList.add("completed");
-        }
+  tasks.forEach((task, index) => {
 
-        let starMark = "";
+    const cell =
+      document.createElement("label");
 
-        if (task.points >= 8) {
-          starMark =
-            '<span class="high-point">⭐⭐⭐</span>';
-        } else if (task.points >= 5) {
-          starMark =
-            '<span class="high-point">⭐⭐</span>';
-        } else if (task.points >= 3) {
-          starMark =
-            '<span class="high-point">⭐</span>';
-        }
+    cell.className = "cell";
 
-        cell.innerHTML = `
-          <input
-            type="checkbox"
-            data-index="${index}"
-            ${checkedTasks[index] ? "checked" : ""}
-          >
-          <div class="task-name">${task.name}</div>
-          <div class="point">
-            ${starMark}${task.points}pt
-          </div>
-        `;
+    if (task.free) {
+
+      cell.classList.add("free");
+
+      cell.innerHTML = `
+        <div class="task-name">FREE</div>
+        <div class="point">自動達成</div>
+      `;
+
+    } else {
+
+      if (checkedTasks[index]) {
+        cell.classList.add("completed");
       }
 
-      grid.appendChild(cell);
-    });
+      let starMark = "";
 
-    const checkboxes = document.querySelectorAll(
+      if (task.points >= 8) {
+
+        starMark =
+          '<span class="high-point">⭐⭐⭐</span>';
+
+      } else if (task.points >= 5) {
+
+        starMark =
+          '<span class="high-point">⭐⭐</span>';
+
+      } else if (task.points >= 3) {
+
+        starMark =
+          '<span class="high-point">⭐</span>';
+
+      }
+
+      cell.innerHTML = `
+        <input
+          type="checkbox"
+          data-index="${index}"
+          ${checkedTasks[index] ? "checked" : ""}
+        >
+
+        <div class="task-name">
+          ${task.name}
+        </div>
+
+        <div class="point">
+          ${starMark}${task.points}pt
+        </div>
+      `;
+    }
+
+    grid.appendChild(cell);
+
+  });
+
+  const checkboxes =
+    document.querySelectorAll(
       'input[type="checkbox"][data-index]'
     );
+
+  checkboxes.forEach((checkbox) => {
+
+    checkbox.addEventListener(
+      "change",
+      async function () {
+
+        const index =
+          Number(this.dataset.index);
+
+        checkedTasks[index] =
+          this.checked;
+
+        checkedTasks[12] = true;
+
+        const cell =
+          this.closest(".cell");
+
+        cell.classList.toggle(
+          "completed",
+          this.checked
+        );
+
+        updateScore();
+
+        await saveChecks();
+
+      }
+    );
+
+  });
+
+}
 
     checkboxes.forEach((checkbox) => {
       checkbox.addEventListener("change", async function () {
@@ -602,7 +658,45 @@
 await saveChecks();
       });
     });
+async function loadChecksFromFirestore() {
 
+  try {
+
+    const snapshot =
+      await window.getDoc(
+        window.doc(
+          window.db,
+          "users",
+          userId
+        )
+      );
+
+    if (!snapshot.exists()) {
+      return;
+    }
+
+    const data =
+      snapshot.data();
+
+    if (
+      Array.isArray(data.checks)
+    ) {
+
+      checkedTasks =
+        data.checks;
+
+    }
+
+  } catch (e) {
+
+    console.error(
+      "Firestore読込失敗",
+      e
+    );
+
+  }
+
+}
 async function saveChecks() {
 
   localStorage.setItem(
@@ -717,8 +811,17 @@ if (isComplete) {
   completeMessage.textContent = "";}
 
 }
-    saveChecks();
-    updateScore();
+async function initializeApp() {
+
+  await loadChecksFromFirestore();
+
+  buildBingo();
+
+  updateScore();
+
+}
+
+initializeApp();
     
   </script>
 <script type="module">
