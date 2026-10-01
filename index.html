@@ -793,7 +793,7 @@ if (isComplete) {
   completeMessage.textContent = "";}
 
 }
-async function initializeApp() {
+window.initializeApp = async function () {
 
   await loadChecksFromFirestore();
 
@@ -801,9 +801,7 @@ async function initializeApp() {
 
   updateScore();
 
-}
-
-initializeApp();
+};
     
   </script>
 <script type="module">
@@ -858,6 +856,7 @@ window.db = db;
 window.setDoc = setDoc;
 window.doc = doc;
 window.getDoc = getDoc;
+window.initializeApp();
 
 window.testFirestore = async () => {
 
